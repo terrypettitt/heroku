@@ -480,7 +480,7 @@
             },
             "require": {
                 "laminas/laminas-zendframework-bridge": "^1.0",
-                "php": "^7.3 || ~8.0.0",
+                "php": "^7.3 || ~8.2.4",
                 "psr/http-factory": "^1.0",
                 "psr/http-message": "^1.0"
             },
@@ -693,7 +693,7 @@
                 "firebase/php-jwt": "^5.0",
                 "guzzlehttp/guzzle": "~6.0|~7.0",
                 "johnstevenson/json-works": "~1.1",
-                "php": "^7.2"
+                "php": "^8.2.4"
             },
             "require-dev": {
                 "estahn/phpunit-json-assertions": "^3.0.0",
