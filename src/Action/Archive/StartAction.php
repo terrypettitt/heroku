@@ -1,5 +1,5 @@
 <?php
-
+header('Access-Control-Allow-Origin: *');
 namespace OTHelloWorld\Action\Archive;
 
 use OpenTok\OpenTok;
