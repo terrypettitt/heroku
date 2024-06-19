@@ -43,6 +43,15 @@ $builder->addDefinitions(__DIR__ . '/../config/global.php');
 AppFactory::setContainer($builder->build());
 $app = AppFactory::create();
 
+$app->add(function (RequestInterface $request, $handler) use ($app) {
+    $response = $handler->handle($request);
+    return $response
+        ->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS')
+    ;
+});
+
 $app->get('/', IndexAction::class)->setName('index');
 $app->get('/session', SessionAction::class)->setName('session');
 $app->get('/room/{name}', RoomAction::class)->setName('room');
@@ -57,13 +66,6 @@ $app->map(['GET', 'POST'], '/archive/{archiveId}/view', ViewAction::class)->setN
 $app->options('/:routes+', function(RequestInterface $request, ResponseInterface $response) {
     return $response;
 });
-$app->add(function (RequestInterface $request, $handler) use ($app) {
-    $response = $handler->handle($request);
-    return $response
-        ->withHeader('Access-Control-Allow-Origin', '*')
-        ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS')
-    ;
-});
+
 
 $app->run();
